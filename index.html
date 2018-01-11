@@ -113,6 +113,7 @@ p.fps { float:right; text-align:right; }
 jsGB = {
   run_interval: 0,
   trace: '',
+
   frame: function() {
     var fclock = Z80._clock.m+17556;
     var brk = document.getElementById('breakpoint').value;
@@ -146,6 +147,7 @@ jsGB = {
         break;
       }
     } while(Z80._clock.m < fclock);
+
     var t1 = new Date();
     document.getElementById('fps').innerHTML=Math.round(10000/(t1-t0))/10;
   },
@@ -179,6 +181,7 @@ jsGB = {
       document.getElementById('tilenum').value=t.toString();
       jsGB.dbgtile();
     };
+
     jsGB.dbgupdate();
     jsGB.dbgtile();
     jsGB.trace = '';
@@ -202,8 +205,10 @@ jsGB = {
   
     document.getElementById('op_run').innerHTML = 'Run';
     document.getElementById('op_run').onclick = jsGB.run;
+
     //XHR.connect('/log.php', {trace:jsGB.trace}, {success:function(x){}});
   },
+
   dbgupdate: function() {
     var t = document.getElementById('reg').getElementsByTagName('td');
     var x,j,k;
@@ -256,15 +261,18 @@ jsGB = {
     jsGB.trace +=
       ("A"+a+"/B"+b+"/C"+c+"/D"+d+"/E"+e+"/F"+f+"/H"+h+"/L"+l+"/PC"+pc+"/SP"+sp+"\n");
   },
+
   dbgtile: function() {
     var tn = parseInt(document.getElementById('tilenum').value);
     var t = GPU._tilemap[tn];
     var c = ['#ffffff','#c0c0c0','#606060','#000000'];
     var d = document.getElementById('tilepixels').getElementsByTagName('div');
+
     for(var y=0;y<8;y++)
       for(var x=0;x<8;x++)
         d[y*8+x].style.backgroundColor=c[t[y][x]];
   },
+
   step: function() {
     if(Z80._r.ime && MMU._ie && MMU._if)
     {
@@ -293,6 +301,7 @@ jsGB = {
     jsGB.dbgupdate();
   }
 };
+
 window.onload = jsGB.reset;
 window.onkeydown = KEY.keydown;
 window.onkeyup = KEY.keyup;
