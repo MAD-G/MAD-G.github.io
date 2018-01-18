@@ -62,11 +62,16 @@ p.fps { float:right; text-align:right; }
   <ul class="tablist" id="tablist_debug">
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
-	<li><input style="opacity: 0.0;" type="file" id="file" name="file">Load</li>
+	<li><input style="opacity: 0.0; width: 0px; height: 0px;" type="file" id="file" name="file">Load</li>
 	<li id="op_local" onclick="localTest()">Load Test</li>
   </ul></div>
   </div>
   <script type="text/javascript">
+  document.getElementById('screen').onkeydown = function (e) {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        e.view.event.preventDefault();
+    }
+	}
   var flag = 0;
   function handleFileSelect(evt) {
 	flag = 0;
