@@ -16,6 +16,7 @@ layout: default
   <style type="text/css">
 * { margin:0; padding: 0; }
 body { padding: 5px; background-color: black; color: black; font-family:Arial, Helvetica, sans-serif; font-size:0.82em; }
+#gb {text-align: center;}
 #out { height:144px; width:160px; border: 1px solid white; margin:0 5px 0 0; background:black; display: inline-block;}
 #msg { margin: 5px; font-family: sans-serif; font-size: 0.82em; }
 div.tab { height:124px; width:320px; border:1px solid black; margin:20px 5px 5px 165px; overflow:auto; }
@@ -23,7 +24,7 @@ ul.ops { float:bottom; list-style:none inside; }
 ul.ops li { cursor:pointer; }
 table#reg { font-size:11px; font-family:Lucida Console, Bitstream Vera Sans Mono, monospace; line-height:1em; }
 table#reg td.regname { text-align:right; padding-left:1em; }
-ul.tablist { list-style: none inside; position:relative; bottom:-1px; display: inline-block;}
+ul.tablist { list-style: none inside; bottom:-1px; display: inline-block; padding-left:0px;}
 ul.tablist li { display: block; float: left; background: #FFE788; border-top: 1px solid black; border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 3px 0.5em; margin-right: 2px; cursor: pointer; font-size:12px; font-weight:bold;}
 ul.tablist li.tab_hi { border-left: 1px solid black; border-right: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black; background: #FFE788; font-size:12px; font-weight:bold;}
 p#op_load { margin-left: 165px; }
@@ -37,6 +38,7 @@ p.fps { float:right; text-align:right; }
   </style>
  </head>
  <body>
+ <div id="gb">
  <div>
   <div id="out" style="this.style.background='black'">
    <canvas id="screen" width="160" height="144">
@@ -47,8 +49,9 @@ p.fps { float:right; text-align:right; }
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
     <li id="op_step" onclick="jsGB.pause()">Step</li>
-	<li><input class="ul.tablist li" type="file" id="file" name="file"></li>
+	<li><input style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" type="file" id="file" name="file">Load</li>
   </ul></div>
+  </div>
   <script type="text/javascript">
 jsGB = {
   run_interval: 0,
