@@ -112,7 +112,7 @@ jsGB = {
   },
   
   reset: function() {
-    LOG.reset(); GPU.reset(); MMU.reset(); Z80.reset(); KEY.reset(); TIMER.reset();
+    GPU.reset(); MMU.reset(); Z80.reset(); KEY.reset(); TIMER.reset();
     Z80._r.pc=0x100;MMU._inbios=0;Z80._r.sp=0xFFFE;Z80._r.hl=0x014D;Z80._r.c=0x13;Z80._r.e=0xD8;Z80._r.a=1;
 	
 	if(flag==0)
