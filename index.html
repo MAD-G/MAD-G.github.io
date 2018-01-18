@@ -64,7 +64,7 @@ p.fps { float:right; text-align:right; }
     <li id="op_run" onclick="jsGB.run()">Run</li>
     <li id="op_pause" onclick="jsGB.pause()">Pause</li>
 	<li><input style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" type="file" id="file" name="file">Load</li>
-	<li id="op_local" onclick="jsGB.local()">Load Test</li>
+	<li id="op_local" onclick="localTest()">Load Test</li>
   </ul></div>
   </div>
   <script type="text/javascript">
@@ -73,6 +73,9 @@ p.fps { float:right; text-align:right; }
 	flag = 0;
   }
   document.getElementById('file').addEventListener('change', handleFileSelect, false);
+  function localTest() {
+	flag = 1;
+  }
 jsGB = {
   run_interval: 0,
   trace: '',
@@ -175,10 +178,6 @@ jsGB = {
     document.getElementById('op_run').innerHTML = 'Pause';
     document.getElementById('op_run').onclick = jsGB.pause;
   },
-  
-  local: function() {
-	flag = 1;
-  }
   pause: function() {
     clearInterval(jsGB.run_interval);
     Z80._stop = 1;
@@ -290,38 +289,38 @@ window.onkeyup = KEY.keyup;
 	I have included a (hopefully) public domain ROM of a Tic-Tac-Toe game for testing. I cannot host any licensed game ROM as such an act is illegal. Bring your own ROM if you want to play Pokemon/Metroid/etc. Some features (notably windows and sound) are missing, so you may run into bugs.
 	</p>
 	<p>
-	Instructions:
-	1) Load ROM
-	2) Press Reset
+	Instructions:<br>
+	1) Load ROM<br>
+	2) Press Reset<br>
 	3) Press Start
 	</p>
 	<p>
-	Controls:
-	A - Z
-	B - X
-	Start - Enter
-	Select - Space
+	Controls:<br>
+	A - Z<br>
+	B - X<br>
+	Start - Enter<br>
+	Select - Space<br>
 	D-pad = Arrow keys
 	</p>
 	<p>
-	Summary:
-	CPU - Fully emulated
-	MMU - Fully emulated
-	BIOS - Emulated(ish)
-	Sprites - Functional
-	Backgrounds - Functional
-	Timer - Working (but buggy)
-	Interrupts - Emulated
-	Sound - Missing
+	Summary:<br>
+	CPU - Fully emulated<br>
+	MMU - Fully emulated<br>
+	BIOS - Emulated(ish)<br>
+	Sprites - Functional<br>
+	Backgrounds - Functional<br>
+	Timer - Working (but buggy)<br>
+	Interrupts - Emulated<br>
+	Sound - Missing<br>
 	Windows - Missing
 	</p>
 	<p>
 	Acknowledgements:
-	Imran Nazar: For his blog and original code.
-	Pan/ATX, nocash et al: Padocs DMG specification document
-	Sean Young, Vrije University: Z80 opcode map
-	Mostek Inc: Z80 timings
-	Pat Fagan: Diffsheet from Z80 to GameBoy Z80
+	Imran Nazar: For his blog and original code.<br>
+	Pan/ATX, nocash et al: Padocs DMG specification document<br>
+	Sean Young, Vrije University: Z80 opcode map<br>
+	Mostek Inc: Z80 timings<br>
+	Pat Fagan: Diffsheet from Z80 to GameBoy Z80<br>
 	Kevin Matney, UIUC: Microscopic dump of DMG BIOS
 	</p>
  </div>
