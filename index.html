@@ -105,11 +105,6 @@ jsGB = {
       Z80._clock.m += Z80._r.m;
       GPU.checkline();
       TIMER.inc();
-      if((brk && parseInt(brk,16)==Z80._r.pc) || Z80._stop)
-      {
-        jsGB.pause();
-        break;
-      }
     } while(Z80._clock.m < fclock);
 
     var t1 = new Date();
