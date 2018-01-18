@@ -50,6 +50,7 @@ p.fps { float:right; text-align:right; }
 	</p>
 	<p>
 	Fortunately, he left his code in a Github repo, allowing me to pick up the pieces. This page will contain the latest build of my emulator as well as any relevant comments from me.
+	</p>
  </div>
  <div id="gb">
  <div>
@@ -61,11 +62,17 @@ p.fps { float:right; text-align:right; }
   <ul class="tablist" id="tablist_debug">
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
-    <li id="op_step" onclick="jsGB.pause()">Step</li>
+    <li id="op_pause" onclick="jsGB.pause()">Pause</li>
 	<li><input style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" type="file" id="file" name="file">Load</li>
+	<li id="op_local" onclick="jsGB.local()">Load Test</li>
   </ul></div>
   </div>
   <script type="text/javascript">
+  var flag = 0;
+  function handleFileSelect(evt) {
+	flag = 0;
+  }
+  document.getElementById('file').addEventListener('change', handleFileSelect, false);
 jsGB = {
   run_interval: 0,
   trace: '',
@@ -111,7 +118,22 @@ jsGB = {
   reset: function() {
     LOG.reset(); GPU.reset(); MMU.reset(); Z80.reset(); KEY.reset(); TIMER.reset();
     Z80._r.pc=0x100;MMU._inbios=0;Z80._r.sp=0xFFFE;Z80._r.hl=0x014D;Z80._r.c=0x13;Z80._r.e=0xD8;Z80._r.a=1;
+	
+	if(flag==0)
     MMU.load(document.getElementById('file').files[0]);
+	else {
+		var blob = null;
+		var xhr = new XMLHttpRequest(); 
+		xhr.open("GET", "/test/ttt.gb"); 
+		xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+		xhr.onload = function() 
+		{
+			blob = xhr.response;
+			MMU.load(blob);
+		}
+		xhr.send();
+	}
+	MMU.load()
   
     document.getElementById('op_reset').onclick=jsGB.reset;
     document.getElementById('op_run').onclick=jsGB.run;
@@ -154,6 +176,9 @@ jsGB = {
     document.getElementById('op_run').onclick = jsGB.pause;
   },
   
+  local: function() {
+	flag = 1;
+  }
   pause: function() {
     clearInterval(jsGB.run_interval);
     Z80._stop = 1;
@@ -260,5 +285,45 @@ jsGB = {
 window.onkeydown = KEY.keydown;
 window.onkeyup = KEY.keyup;
   </script>
+   <div>
+ <p>
+	I have included a (hopefully) public domain ROM of a Tic-Tac-Toe game for testing. I cannot host any licensed game ROM as such an act is illegal. Bring your own ROM if you want to play Pokemon/Metroid/etc. Some features (notably windows and sound) are missing, so you may run into bugs.
+	</p>
+	<p>
+	Instructions:
+	1) Load ROM
+	2) Press Reset
+	3) Press Start
+	</p>
+	<p>
+	Controls:
+	A - Z
+	B - X
+	Start - Enter
+	Select - Space
+	D-pad = Arrow keys
+	</p>
+	<p>
+	Summary:
+	CPU - Fully emulated
+	MMU - Fully emulated
+	BIOS - Emulated(ish)
+	Sprites - Functional
+	Backgrounds - Functional
+	Timer - Working (but buggy)
+	Interrupts - Emulated
+	Sound - Missing
+	Windows - Missing
+	</p>
+	<p>
+	Acknowledgements:
+	Imran Nazar: For his blog and original code.
+	Pan/ATX, nocash et al: Padocs DMG specification document
+	Sean Young, Vrije University: Z80 opcode map
+	Mostek Inc: Z80 timings
+	Pat Fagan: Diffsheet from Z80 to GameBoy Z80
+	Kevin Matney, UIUC: Microscopic dump of DMG BIOS
+	</p>
+ </div>
  </body>
 </html>
