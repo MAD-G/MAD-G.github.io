@@ -37,16 +37,18 @@ p.fps { float:right; text-align:right; }
   </style>
  </head>
  <body>
+ <div>
   <div id="out" style="this.style.background='black'">
    <canvas id="screen" width="160" height="144">
    </canvas>
-  </div>
+  </div></div>
+  <div>
   <ul class="tablist" id="tablist_debug">
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
     <li id="op_step" onclick="jsGB.pause()">Step</li>
 	<li><input type="file" id="file" name="file"></li>
-  </ul>
+  </ul></div>
   <script type="text/javascript">
 jsGB = {
   run_interval: 0,
