@@ -117,9 +117,6 @@ jsGB = {
       GPU.checkline();
       TIMER.inc();
     } while(Z80._clock.m < fclock);
-
-    var t1 = new Date();
-    document.getElementById('fps').innerHTML=Math.round(10000/(t1-t0))/10;
   },
   
   reset: function() {
@@ -131,7 +128,7 @@ jsGB = {
 	else {
 		var blob = null;
 		var xhr = new XMLHttpRequest(); 
-		xhr.open("GET", "/test/ttt.gb"); 
+		xhr.open("GET", "/tests/ttt.gb"); 
 		xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
 		xhr.onload = function() 
 		{
