@@ -62,7 +62,7 @@ p.fps { float:right; text-align:right; }
   <ul class="tablist" id="tablist_debug">
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
-	<li><div style="position: relative"><input style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" type="file" id="file" name="file"></div>Load</li>
+	<li><div style="position: relative; width: 100%"><input style="opacity: 0.0; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height:100%;" type="file" id="file" name="file"></div>Load</li>
 	<li id="op_local" onclick="localTest()">Load Test</li>
   </ul></div>
   </div>
@@ -264,7 +264,7 @@ window.onkeyup = KEY.keyup;
 	</p>
 	<p>
 	Instructions:<br>
-	1) Load ROM<br>
+	1) Load ROM (or click 'Load Test' to load the Tic-Tac-Toe test ROM)<br>
 	2) Press Reset<br>
 	3) Press Start
 	</p>
