@@ -38,6 +38,7 @@ p.fps { float:right; text-align:right; }
   </style>
  </head>
  <body>
+ <div id="input_container" style="width: 0px; height: 0px; overflow: hidden"><input type="file" id="file" name="file"></div>
  <div>
  <p>
 	The high flexibility of the programming language C, its low level characteristics and easy translation into assembly make it ideal for emulating hardware. As a result, emulators for all platforms are generally written in C/C++.
@@ -62,11 +63,14 @@ p.fps { float:right; text-align:right; }
   <ul class="tablist" id="tablist_debug">
     <li id="op_reset" onclick="jsGB.reset()">Reset</li>
     <li id="op_run" onclick="jsGB.run()">Run</li>
-	<li><div style="position: relative; float: left;"><input style="opacity: 0.0; position: absolute; width: 0px;" type="file" id="file" name="file"></div>Load</li>
+	<li onclick="inputClick()">Load</li>
 	<li id="op_local" onclick="localTest()">Load Test</li>
   </ul></div>
   </div>
   <script type="text/javascript">
+  function inputClick() {
+	document.getElementById("file").click();
+  }
   window.addEventListener("keydown", function(e) {
     // space and arrow keys
     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
